@@ -1,0 +1,38 @@
+package: schema
+generate:
+  models: true
+output: src/openapi/front/schema/schema.go
+output-options:
+  user-templates:
+    request-bodies.tmpl: |
+      {{range .}}{{$opid := .OperationId}}
+      {{if .RequiresParamObject }}
+      {{if (gt (len .QueryParams) 0) }}
+      // {{$opid}} operation middleware
+      func Bind{{$opid}}QueryParams(r *http.Request) (*{{.OperationId}}Params, error) {
+        {{if .RequiresParamObject }}var err error{{end}}
+        {{if .RequiresParamObject}}
+          // Parameter object where we will unmarshal all parameters from the context
+          var params {{.OperationId}}Params
+
+          {{range $paramIdx, $param := .QueryParams}}// ------------- {{if .Required}}Required{{else}}Optional{{end}} query parameter "{{.ParamName}}" -------------
+            if paramValue := r.URL.Query().Get("{{.ParamName}}"); paramValue != "" {
+
+            {{if .IsPassThrough}}
+              params.{{.GoName}} = {{if not .Required}}&{{end}}paramValue
+            {{end}}
+
+            }
+            {{if .IsStyled}}
+            err = runtime.BindQueryParameter("{{.Style}}", {{.Explode}}, {{.Required}}, "{{.ParamName}}", r.URL.Query(), &params.{{.GoName}})
+            if err != nil {
+              return nil, err
+            }
+            {{end}}
+          {{end}}
+        {{end}}
+        return {{if .RequiresParamObject }}&params, err{{end}}
+      }
+      {{end}}
+      {{end}}
+      {{end}}

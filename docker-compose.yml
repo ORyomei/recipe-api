@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: app
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    tty: true
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+    volumes:
+      - ./:/go/app
+    env_file:
+      - .env
+    command: go run ./src/cmd/http/main.go
+
+  mysql:
+    image: mysql:8.0.27
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/conf.d:/etc/mysql/conf.d:ro
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    # env_file:
+    #   - .env
+    tty: true
+
+volumes:
+  mysql:
