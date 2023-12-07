@@ -2,8 +2,8 @@ package schema
 
 import "recipe_api/src/domain/entity"
 
-func NewNoIndexedRecipe(r entity.Recipe) *NoIndexedRecipe {
-	return &NoIndexedRecipe{
+func NewIdLessRecipe(r entity.Recipe) *IdLessRecipe {
+	return &IdLessRecipe{
 		Title:       r.Title,
 		MakingTime:  r.MakingTime,
 		Serves:      r.Serves,

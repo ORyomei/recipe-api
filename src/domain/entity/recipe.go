@@ -8,7 +8,7 @@ type Recipe struct {
 	MakingTime  string
 	Serves      string
 	Ingredients string
-	Cost        string
+	Cost        int
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 }

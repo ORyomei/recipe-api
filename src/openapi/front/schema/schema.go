@@ -15,7 +15,7 @@ type DeleteRecipeResponseBody struct {
 // GetRecipeResponseBody defines model for GetRecipeResponseBody.
 type GetRecipeResponseBody struct {
 	Message *string   `json:"message,omitempty"`
-	Recipe *[]Recipe `json:"recipe,omitempty"`
+	Recipe  *[]Recipe `json:"recipe,omitempty"`
 }
 
 // GetRecipesResponseBody defines model for GetRecipesResponseBody.
@@ -23,22 +23,22 @@ type GetRecipesResponseBody struct {
 	Recipes *[]Recipe `json:"recipes,omitempty"`
 }
 
-// NoIndexedRecipe defines model for NoIndexedRecipe.
-type NoIndexedRecipe struct {
-	Cost       string `json:"cost"`
-	Ingredients string `json:"Ingredients"`
-	MakingTime string `json:"making_time"`
-	Serves     string `json:"serves"`
-	Title      string `json:"title"`
+// IdLessRecipe defines model for IdLessRecipe.
+type IdLessRecipe struct {
+	Cost        int    `json:"cost"`
+	Ingredients string `json:"ingredients"`
+	MakingTime  string `json:"making_time"`
+	Serves      string `json:"serves"`
+	Title       string `json:"title"`
 }
 
 // PatchRecipeRequestBody defines model for PatchRecipeRequestBody.
-type PatchRecipeRequestBody = NoIndexedRecipe
+type PatchRecipeRequestBody = IdLessRecipe
 
 // PatchRecipeResponseBody defines model for PatchRecipeResponseBody.
 type PatchRecipeResponseBody struct {
-	Message *string            `json:"message,omitempty"`
-	Recipe *[]NoIndexedRecipe `json:"recipe,omitempty"`
+	Message *string         `json:"message,omitempty"`
+	Recipe  *[]IdLessRecipe `json:"recipe,omitempty"`
 }
 
 // PostRecipeErrorResponseBody defines model for PostRecipeErrorResponseBody.
@@ -48,7 +48,7 @@ type PostRecipeErrorResponseBody struct {
 }
 
 // PostRecipeRequestBody defines model for PostRecipeRequestBody.
-type PostRecipeRequestBody = NoIndexedRecipe
+type PostRecipeRequestBody = IdLessRecipe
 
 // PostRecipeResponseBody defines model for PostRecipeResponseBody.
 type PostRecipeResponseBody struct {
@@ -57,22 +57,22 @@ type PostRecipeResponseBody struct {
 
 // PostedRecipe defines model for PostedRecipe.
 type PostedRecipe struct {
-	Cost       string    `json:"cost"`
-	CreatedAt  time.Time `json:"created_at"`
-	Id         uint64    `json:"id"`
-	Ingredients string    `json:"Ingredients"`
-	MakingTime string    `json:"making_time"`
-	Serves     string    `json:"serves"`
-	Title      string    `json:"title"`
-	UpdatedAt  time.Time `json:"updated_at"`
+	Cost        int       `json:"cost"`
+	CreatedAt   time.Time `json:"created_at"`
+	Id          uint64    `json:"id"`
+	Ingredients string    `json:"ingredients"`
+	MakingTime  string    `json:"making_time"`
+	Serves      string    `json:"serves"`
+	Title       string    `json:"title"`
+	UpdatedAt   time.Time `json:"updated_at"`
 }
 
 // Recipe defines model for Recipe.
 type Recipe struct {
-	Cost       string `json:"cost"`
-	Id         uint64 `json:"id"`
-	Ingredients string `json:"Ingredients"`
-	MakingTime string `json:"making_time"`
-	Serves     string `json:"serves"`
-	Title      string `json:"title"`
+	Cost        int    `json:"cost"`
+	Id          uint64 `json:"id"`
+	Ingredients string `json:"ingredients"`
+	MakingTime  string `json:"making_time"`
+	Serves      string `json:"serves"`
+	Title       string `json:"title"`
 }

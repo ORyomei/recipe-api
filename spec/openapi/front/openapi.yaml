@@ -95,7 +95,7 @@ paths:
             
       
 components:
-  schemas:    
+  schemas:
     Recipe:
       type: object
       properties:
@@ -107,19 +107,19 @@ components:
         making_time:
           type: string
         serves:
-          type: string    
-        Ingredients:
+          type: string
+        ingredients:
           type: string
         cost:
-          type: string     
+          type: integer
       required:
         - "id"
         - "title"
         - "making_time"
         - "serves"
-        - "Ingredients"
+        - "ingredients"
         - "cost"
-    NoIndexedRecipe:
+    IdLessRecipe:
       type: object
       properties:
         title:
@@ -127,16 +127,16 @@ components:
         making_time:
           type: string
         serves:
-          type: string    
-        Ingredients:
+          type: string
+        ingredients:
           type: string
         cost:
-          type: string     
+          type: integer
       required:
         - "title"
         - "making_time"
         - "serves"
-        - "Ingredients"
+        - "ingredients"
         - "cost"
     PostedRecipe:
       type: object
@@ -150,10 +150,10 @@ components:
           type: string
         serves:
           type: string    
-        Ingredients:
+        ingredients:
           type: string
         cost:
-          type: string      
+          type: integer      
         created_at:
           type: string 
           format: date-time
@@ -165,14 +165,14 @@ components:
         - "title"
         - "making_time"
         - "serves"
-        - "Ingredients"
+        - "ingredients"
         - "cost"
         - "created_at"
         - "updated_at"    
     PostRecipeRequestBody:
-      $ref: "#/components/schemas/NoIndexedRecipe"
+      $ref: "#/components/schemas/IdLessRecipe"
     PatchRecipeRequestBody:
-      $ref: "#/components/schemas/NoIndexedRecipe"
+      $ref: "#/components/schemas/IdLessRecipe"
     GetRecipesResponseBody:
       type: object
       properties:
@@ -211,7 +211,7 @@ components:
         recipe:
           type: array
           items: 
-            $ref: "#/components/schemas/NoIndexedRecipe"
+            $ref: "#/components/schemas/IdLessRecipe"
     DeleteRecipeResponseBody:
       type: object
       properties:

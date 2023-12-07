@@ -87,7 +87,7 @@ func (c *HttpFrontRecipeController) Update(ctx *gin.Context) (int, interface{}, 
 	m := "Recipe successfully updated!"
 	return http.StatusOK, schema.PatchRecipeResponseBody{
 		Message: &m,
-		Recipe:  &[]schema.NoIndexedRecipe{*schema.NewNoIndexedRecipe(*r)},
+		Recipe:  &[]schema.IdLessRecipe{*schema.NewIdLessRecipe(*r)},
 	}, nil
 
 }

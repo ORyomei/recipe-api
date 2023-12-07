@@ -15,7 +15,7 @@ type Recipe struct {
 	MakingTime  string `gorm:"size:256"`
 	Serves      string `gorm:"size:256"`
 	Ingredients string `gorm:"size:256"`
-	Cost        string `gorm:"size:256"`
+	Cost        int
 }
 
 func (r *Recipe) toEntity() *entity.Recipe {
